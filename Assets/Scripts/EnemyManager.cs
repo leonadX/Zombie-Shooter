@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     GameObject player;
+    bool collided = false;
     public float maxDistance;
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,12 @@ public class EnemyManager : MonoBehaviour
         else
         {
             Destroy(this.gameObject, 0.5f);
+            if (!collided)
+            {
+                collided = true;
+                GameManager.instance.health -= 1;
+                GameManager.instance.UpdateHealth();
+            }
         }
         
     }
@@ -30,6 +37,7 @@ public class EnemyManager : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Bullet"))
         {
+            GameManager.instance.score += 1;
             Destroy(this.gameObject);
             Destroy(collision.gameObject);
         }
