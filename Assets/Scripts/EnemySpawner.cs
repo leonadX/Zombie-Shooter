@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
-        while(true)
+        while(!GameManager.instance.isGameOver)
         {
             Vector3 spawnPos = new Vector3(-5, 0, Random.Range(-2, 2));
             yield return new WaitForSeconds(3.0f);

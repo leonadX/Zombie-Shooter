@@ -9,12 +9,15 @@ public class GameManager : MonoBehaviour
 
     public int score;
     public int health;
+    public GameEvent GameOver;
     public GameObject HealthUI;
     public TextMeshProUGUI scoreText;
+    public bool isGameOver;
 
     private void Awake()
     {
         instance = this;
+        isGameOver = false;
     }
 
     // Start is called before the first frame update
@@ -37,6 +40,12 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(i);
             HealthUI.transform.GetChild(i - 1).gameObject.SetActive(false);
+        }
+
+        if(health == 0)
+        {
+            isGameOver = true;
+            GameOver.Raise();
         }
     }
 }

@@ -16,21 +16,23 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(transform.position,player.transform.position)> 0.75f)
+        if (!GameManager.instance.isGameOver)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, maxDistance * Time.deltaTime);
-        }
-        else
-        {
-            Destroy(this.gameObject, 0.5f);
-            if (!collided)
+            if (Vector3.Distance(transform.position, player.transform.position) > 0.75f)
             {
-                collided = true;
-                GameManager.instance.health -= 1;
-                GameManager.instance.UpdateHealth();
+                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, maxDistance * Time.deltaTime);
+            }
+            else
+            {
+                Destroy(this.gameObject, 0.5f);
+                if (!collided)
+                {
+                    collided = true;
+                    GameManager.instance.health -= 1;
+                    GameManager.instance.UpdateHealth();
+                }
             }
         }
-        
     }
 
     private void OnCollisionEnter(Collision collision)
