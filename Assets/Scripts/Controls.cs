@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 public class Controls : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public Canvas canvas;
+    public GameObject hand;
+    public GameObject text;
     public bool handOnScreen;
 
     // Start is called before the first frame update
@@ -15,15 +17,22 @@ public class Controls : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     }
 
     // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        /*if (PlayerPrefs.GetInt("FirstTime") == 0)
+        {
+            hand.SetActive(true);
+            text.SetActive(true);
+            StartCoroutine(HandAnimation());
+            PlayerPrefs.SetInt("FirstTime", 0);
+        }*/
     }
-    
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         handOnScreen = true;
+        //hand.SetActive(false);
+        //text.SetActive(false);
     }
 
 
@@ -44,6 +53,17 @@ public class Controls : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if (!GameManager.instance.isGameOver)
             PlayerController.instance.SpawnArrow();
         //PlayerController.instance.player.transform.rotation = Quaternion.Euler(0, 0, 0);
-        handOnScreen = false;
+        //handOnScreen = false;
+    }
+
+    public IEnumerator HandAnimation()
+    {
+        while(handOnScreen != true)
+        {
+            LeanTween.moveLocal(hand, new Vector3(270, hand.GetComponent<RectTransform>().anchoredPosition.y, 0), 1.5f).setEase(LeanTweenType.easeInOutQuint);
+            yield return new WaitForSeconds(1.6f);
+            LeanTween.moveLocal(hand, new Vector3(-270, hand.GetComponent<RectTransform>().anchoredPosition.y, 0), 1.0f).setEase(LeanTweenType.easeInOutQuint);
+            yield return new WaitForSeconds(.6f);
+        }
     }
 }
