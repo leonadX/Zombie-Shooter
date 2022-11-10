@@ -7,6 +7,9 @@ public class EnemyManager : MonoBehaviour
     GameObject player;
     bool collided = false;
     public float maxDistance;
+    public GameObject explosionEffect;
+    public GameEvent explosionSoundEvent;
+    public GameEvent PlayerexplosionSoundEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,9 @@ public class EnemyManager : MonoBehaviour
                     collided = true;
                     GameManager.instance.health -= 1;
                     GameManager.instance.UpdateHealth();
+                    GameObject clone = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+                    Destroy(clone, 2.5f);
+                    PlayerexplosionSoundEvent.Raise();
                 }
             }
         }
@@ -42,6 +48,12 @@ public class EnemyManager : MonoBehaviour
             GameManager.instance.score += 1;
             Destroy(this.gameObject);
             Destroy(collision.gameObject);
+            GameObject clone = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            Destroy(clone, 2.5f);
+            explosionSoundEvent.Raise();
         }
     }
+
+
+   
 }
