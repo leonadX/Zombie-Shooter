@@ -26,13 +26,13 @@ public class GameManager : MonoBehaviour
     {
         health = 3;
         score = 0;
-        scoreText.text = "score: " + score.ToString();
+        scoreText.text = score.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "score: " + score.ToString();
+        scoreText.text = score.ToString();
     }
 
     public void UpdateHealth()
@@ -56,5 +56,23 @@ public class GameManager : MonoBehaviour
          {
              SceneManager.LoadScene("GameScene");
          });
+    }
+
+    public void GoToMenu()
+    {
+        Timer.Register(.33f, () =>
+        {
+            SceneManager.LoadScene("MainMenuScene");
+        });
+    }
+
+    public void PauseGame()
+    {
+        PausePanel.pausePanel.transform.GetChild(0).GetComponent<RectTransform>().localScale = Vector3.zero;
+        LeanTween.scale(PausePanel.pausePanel.transform.GetChild(0).gameObject, new Vector3(1, 1, 1), .5f).setEase(LeanTweenType.easeOutBack);
+        Timer.Register(.53f, () =>
+        {
+            Time.timeScale = 0f;
+        });
     }
 }
