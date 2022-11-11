@@ -23,6 +23,7 @@ public class TutorialManager : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+        PlayerPrefs.DeleteAll();
     }
 
     void Start()
