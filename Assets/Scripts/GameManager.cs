@@ -11,14 +11,24 @@ public class GameManager : MonoBehaviour
     public int score;
     public int health;
     public GameEvent GameOver;
+    public GameEvent OnEndTutorial;
     public GameObject HealthUI;
     public TextMeshProUGUI scoreText;
     public bool isGameOver;
+    public bool StartGame;
 
     void Awake()
     {
         instance = this;
         isGameOver = false;
+
+        if (PlayerPrefs.GetInt("FirstTime") == 0)
+        {
+            StartGame = false;
+            PlayerPrefs.SetInt("FirstTime", 1);
+        }
+        else
+            StartGame = true;
     }
 
     // Start is called before the first frame update
@@ -74,5 +84,11 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0f;
         });
+    }
+    
+    public void EndTutorial()
+    {
+        OnEndTutorial.Raise();
+        StartGame = true;
     }
 }

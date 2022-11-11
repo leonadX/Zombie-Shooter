@@ -7,11 +7,15 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public Transform highSpawnPoint;
     public Transform lowSpawnPoint;
+    private float spawnRate;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnEnemies());
+        spawnRate = 3.0f;
+        //increase spawn rate
+        if (GameManager.instance.StartGame)
+            StartEnemyRush();
     }
 
     // Update is called once per frame
@@ -20,13 +24,19 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
+    public void StartEnemyRush()
+    {
+        InvokeRepeating("IncreaseSpawnRate", 30, 30);
+        StartCoroutine(SpawnEnemies());
+    }
+
     IEnumerator SpawnEnemies()
     {
         while(!GameManager.instance.isGameOver)
         {
             Vector3 spawnPos = new Vector3(-5, -0.377f, Random.Range(-2, 2));
             spawnPos = GetSpawnPos();
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(spawnRate);
             GameObject clone = Instantiate(enemyPrefab, spawnPos, enemyPrefab.transform.rotation);
         }
        
@@ -50,5 +60,11 @@ public class EnemySpawner : MonoBehaviour
         }
 
         return spawnPos;
+    }
+
+    public void IncreaseSpawnRate()
+    {
+        spawnRate /= 1.1f;
+        spawnRate = Mathf.Clamp(spawnRate, 1.5f, 3.0f);
     }
 }
