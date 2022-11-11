@@ -13,8 +13,9 @@ public class Stats : MonoBehaviour
     void Start()
     {
         defeated.text += GameManager.instance.score;
-        LeanTween.moveLocal(gameObject.transform.GetChild(0).gameObject, new Vector3(0, 0, 0), 1.5f).setEase(LeanTweenType.easeInOutBack);
-        LeanTween.scale(defeated.gameObject, new Vector3(1, 1, 1), .5f).setDelay(1.5f).setEase(LeanTweenType.easeOutBack);
+        //LeanTween.scale(PausePanel.pausePanel.transform.GetChild(0).gameObject, new Vector3(1, 1, 1), .5f).setEase(LeanTweenType.easeOutBack);
+        LeanTween.scale(gameObject.transform.GetChild(0).gameObject, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeOutBack);
+        LeanTween.scale(defeated.gameObject, new Vector3(1, 1, 1), .5f).setDelay(0.05f).setEase(LeanTweenType.easeOutBack);
         LeanTween.scale(retry, new Vector3(1, 1, 1), .5f).setDelay(1.5f).setEase(LeanTweenType.easeOutBack);
         LeanTween.scale(home, new Vector3(1, 1, 1), .5f).setDelay(1.5f).setEase(LeanTweenType.easeOutBack);
     }

@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public bool isGameOver;
 
-    private void Awake()
+    void Awake()
     {
         instance = this;
         isGameOver = false;
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     {
         Timer.Register(.33f, () =>
         {
-            SceneManager.LoadScene("MainMenuScene");
+            SceneLoader.instance.OpenMenuScene();
         });
     }
 

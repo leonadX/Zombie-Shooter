@@ -41,7 +41,7 @@ public class PausePanel : MonoBehaviour
     {
         Timer.Register(.33f, () =>
         {
-            SceneManager.LoadScene("MainMenuScene");
+            SceneLoader.instance.OpenMenuScene();
         });
     }
 
