@@ -32,8 +32,16 @@ public class TutorialManager : MonoBehaviour
             if (currentIndex == tutorials.tutorial_Instructions.Length)
                 
                 currentIndex= 0;
-                
+            if(currentIndex == 0)
+            {
+                nextButton.SetActive(false);
+            }
+            else
+            {
+                nextButton.SetActive(true);
+              }  
             tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
+            
         }
     }
     public void ChangePrevious()
@@ -46,6 +54,14 @@ public class TutorialManager : MonoBehaviour
             if (currentIndex == -1)
                 
                 currentIndex = tutorials.tutorial_Instructions.Length - 1;
+            if(currentIndex == 3)
+            {
+                prevButton.SetActive(false);
+            }
+            else
+            {
+                prevButton.SetActive(true);
+            }
 
             tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
 
