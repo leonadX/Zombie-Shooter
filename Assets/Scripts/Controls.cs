@@ -44,6 +44,7 @@ public class Controls : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             a = new Vector2(a.x, 0);
             float angle = Mathf.Atan(a.x / a.y);
             Quaternion targetRotation = Quaternion.FromToRotation(Vector3.forward, a);
+            //targetRotation = Quaternion.Euler(0, angle * 57.296f, 0);
             PlayerController.instance.player.transform.rotation = Quaternion.Slerp(PlayerController.instance.player.transform.rotation, targetRotation, Time.deltaTime * 1.5f);
         }
     }
