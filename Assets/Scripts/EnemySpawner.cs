@@ -26,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartEnemyRush()
     {
-        InvokeRepeating("IncreaseSpawnRate", 30, 30);
+        InvokeRepeating("IncreaseSpawnRate", 30, 20);
         StartCoroutine(SpawnEnemies());
     }
 
@@ -64,7 +64,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void IncreaseSpawnRate()
     {
-        spawnRate /= 1.1f;
+        spawnRate /= 1.15f;
         spawnRate = Mathf.Clamp(spawnRate, 1.5f, 3.0f);
     }
 }
