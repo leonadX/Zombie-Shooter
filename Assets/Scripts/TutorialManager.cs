@@ -21,7 +21,7 @@ public class TutorialManager : MonoBehaviour
         PlayerPrefs.SetInt("FirstTime", 0);
         if (PlayerPrefs.GetInt("FirstTime") == 1)
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(true);
         }
         
     }
