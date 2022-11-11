@@ -6405,7 +6405,7 @@ MonoBehaviour:
   Text: {fileID: 0}
   buttonText: {fileID: 744596184}
   hand: {fileID: 1308098049}
-  nextButton: {fileID: 0}
+  nextButton: {fileID: 1189317610}
   prevButton: {fileID: 0}
   currentIndex: 0
 --- !u!4 &1560383255 stripped

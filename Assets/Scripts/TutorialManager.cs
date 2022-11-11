@@ -18,10 +18,10 @@ public class TutorialManager : MonoBehaviour
 
     private void Awake()
     {
-        PlayerPrefs.SetInt("FirstTime", 0);
+        //PlayerPrefs.SetInt("FirstTime", 0);
         if (PlayerPrefs.GetInt("FirstTime") == 1)
         {
-            gameObject.SetActive(true);
+            gameObject.SetActive(false);
         }
         
     }
@@ -32,6 +32,7 @@ public class TutorialManager : MonoBehaviour
         currentIndex = -1;
         tutorialText.GetComponent<RectTransform>().localScale = Vector3.zero;
         Invoke("ChangeNext", 1.6f);
+        nextButton.GetComponent<RectTransform>().localScale = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -43,7 +44,8 @@ public class TutorialManager : MonoBehaviour
     {
         /*for(int i = 0; i<=tutorials.tutorial_Instructions.Length; i++)
         {*/
-            currentIndex++;
+
+        currentIndex++;
             if (currentIndex + 1 != tutorials.tutorial_Instructions.Length)
                 tutorialText.GetComponent<RectTransform>().localScale = Vector3.zero;
 
@@ -65,13 +67,21 @@ public class TutorialManager : MonoBehaviour
 
             if (currentIndex == tutorials.tutorial_Instructions.Length - 1)
             {
-                hand.SetActive(true);
+            Timer.Register(.33f, () =>
+            {
                 buttonText.text = "Begin";
+                nextButton.GetComponent<RectTransform>().localScale = Vector3.zero;
+            });
+            hand.SetActive(true);
                 StartCoroutine(HandAnimation());
             }
 
             tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
             LeanTween.scale(tutorialText.gameObject, Vector3.one, .3f).setEase(LeanTweenType.easeInOutBack);
+        Timer.Register(.8f, () =>
+        {
+            LeanTween.scale(nextButton, Vector3.one, .3f).setEase(LeanTweenType.easeInOutBack);
+        });
         //}
     }
     public void ChangePrevious()

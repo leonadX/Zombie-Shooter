@@ -22,14 +22,6 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         isGameOver = false;
-
-        if (PlayerPrefs.GetInt("FirstTime") == 0)
-        {
-            StartGame = false;
-            PlayerPrefs.SetInt("FirstTime", 1);
-        }
-        else
-            StartGame = true;
     }
 
     // Start is called before the first frame update
@@ -38,6 +30,14 @@ public class GameManager : MonoBehaviour
         health = 3;
         score = 0;
         scoreText.text = score.ToString();
+
+        if (PlayerPrefs.GetInt("FirstTime") == 0)
+        {
+            StartGame = false;
+            PlayerPrefs.SetInt("FirstTime", 1);
+        }
+        else
+            StartGame = true;
     }
 
     // Update is called once per frame
