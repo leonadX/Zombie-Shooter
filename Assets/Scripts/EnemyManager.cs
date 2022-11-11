@@ -40,12 +40,38 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
+    void ChangeScoreColorRed()
+    {
+        
+        GameManager.instance.scoreText.color= Color.red;
+    
+        
+    }
+    void ChangeScoreColorWhite()
+    {
+        GameManager.instance.scoreText.color= Color.white;
+        
+        
+    }
+    public void UpdateScore()
+    {
+        GameManager.instance.score += 1;
+        Invoke("ChangeScoreColorRed",0f);
+        if(GameManager.instance.scoreText.color == Color.red)
+        {
+
+            
+            Invoke("ChangeScoreColorWhite",0.5f);
+        }
+        
+        
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Bullet"))
         {
-            GameManager.instance.score += 1;
+            UpdateScore();
             Destroy(this.gameObject);
             Destroy(collision.gameObject);
             GameObject clone = Instantiate(explosionEffect, transform.position, Quaternion.identity);
