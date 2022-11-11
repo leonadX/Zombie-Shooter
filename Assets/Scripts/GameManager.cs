@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameEvent GameOver;
     public GameEvent OnEndTutorial;
     public GameObject HealthUI;
+    public GameObject ScorePanel;
     public TextMeshProUGUI scoreText;
     public bool isGameOver;
     public bool StartGame;
@@ -55,8 +56,16 @@ public class GameManager : MonoBehaviour
 
         if(health == 0)
         {
+            MainPlayerController.instance.StopFiring();
+            MainPlayerController.instance.animator.SetTrigger("Death");
+            GameObject go = MainPlayerController.instance.InputSlider.gameObject;
+            LeanTween.moveLocal(go, go.GetComponent<RectTransform>().localPosition + new Vector3(0, -500, 0), 1.5f);
+            LeanTween.moveLocal(ScorePanel, ScorePanel.GetComponent<RectTransform>().localPosition + new Vector3(0, 500, 0), 1.5f);
             isGameOver = true;
-            GameOver.Raise();
+            Timer.Register(3.0f, () =>
+            {
+                GameOver.Raise();
+            });
         }
     }
 

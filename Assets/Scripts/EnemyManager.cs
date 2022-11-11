@@ -43,17 +43,17 @@ public class EnemyManager : MonoBehaviour
                 }
             }
         }
-        if(GameManager.instance.scoreText.color == Color.red)
+        if(GameManager.instance.scoreText.color == Color.green)
         {
 
             
             Invoke("ChangeScoreColorWhite",0.5f);
         }
     }
-    void ChangeScoreColorRed()
+    void ChangeScoreColorGreen()
     {
         
-        GameManager.instance.scoreText.color= Color.red;
+        GameManager.instance.scoreText.color= Color.green;
     
         
     }
@@ -66,7 +66,7 @@ public class EnemyManager : MonoBehaviour
     public void UpdateScore()
     {
         GameManager.instance.score += 1;
-        Invoke("ChangeScoreColorRed",0f);
+        Invoke("ChangeScoreColorGreen",0f);
         
         
         
