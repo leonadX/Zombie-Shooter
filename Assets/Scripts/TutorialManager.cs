@@ -21,7 +21,7 @@ public class TutorialManager : MonoBehaviour
         //PlayerPrefs.SetInt("FirstTime", 0);
         if (PlayerPrefs.GetInt("FirstTime") == 1)
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(true);
         }
         
     }
@@ -32,7 +32,7 @@ public class TutorialManager : MonoBehaviour
         currentIndex = -1;
         tutorialText.GetComponent<RectTransform>().localScale = Vector3.zero;
         Invoke("ChangeNext", 1.6f);
-        
+        PlayerPrefs.DeleteAll();
     }
 
     // Update is called once per frame
