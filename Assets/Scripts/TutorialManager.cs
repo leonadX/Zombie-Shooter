@@ -18,7 +18,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Awake()
     {
-        //PlayerPrefs.SetInt("FirstTime", 0);
+        PlayerPrefs.SetInt("FirstTime", 0);
         if (PlayerPrefs.GetInt("FirstTime") == 1)
         {
             gameObject.SetActive(false);
@@ -32,7 +32,6 @@ public class TutorialManager : MonoBehaviour
         currentIndex = -1;
         tutorialText.GetComponent<RectTransform>().localScale = Vector3.zero;
         Invoke("ChangeNext", 1.6f);
-        
     }
 
     // Update is called once per frame
@@ -42,8 +41,8 @@ public class TutorialManager : MonoBehaviour
     }
     public void ChangeNext()
     {
-        for(int i = 0; i<=tutorials.tutorial_Instructions.Length; i++)
-        {
+        /*for(int i = 0; i<=tutorials.tutorial_Instructions.Length; i++)
+        {*/
             currentIndex++;
             if (currentIndex + 1 != tutorials.tutorial_Instructions.Length)
                 tutorialText.GetComponent<RectTransform>().localScale = Vector3.zero;
@@ -73,7 +72,7 @@ public class TutorialManager : MonoBehaviour
 
             tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
             LeanTween.scale(tutorialText.gameObject, Vector3.one, .3f).setEase(LeanTweenType.easeInOutBack);
-        }
+        //}
     }
     public void ChangePrevious()
     {
