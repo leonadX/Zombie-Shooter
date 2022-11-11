@@ -11,14 +11,25 @@ public class GameManager : MonoBehaviour
     public int score;
     public int health;
     public GameEvent GameOver;
+    public GameEvent OnEndTutorial;
     public GameObject HealthUI;
+    public GameObject ScorePanel;
     public TextMeshProUGUI scoreText;
     public bool isGameOver;
+    public bool StartGame;
 
     void Awake()
     {
         instance = this;
         isGameOver = false;
+
+        if (PlayerPrefs.GetInt("FirstTime") == 0)
+        {
+            StartGame = false;
+            PlayerPrefs.SetInt("FirstTime", 1);
+        }
+        else
+            StartGame = true;
     }
 
     // Start is called before the first frame update
@@ -45,8 +56,16 @@ public class GameManager : MonoBehaviour
 
         if(health == 0)
         {
+            MainPlayerController.instance.StopFiring();
+            MainPlayerController.instance.animator.SetTrigger("Death");
+            GameObject go = MainPlayerController.instance.InputSlider.gameObject;
+            LeanTween.moveLocal(go, go.GetComponent<RectTransform>().localPosition + new Vector3(0, -500, 0), 1.5f);
+            LeanTween.moveLocal(ScorePanel, ScorePanel.GetComponent<RectTransform>().localPosition + new Vector3(0, 500, 0), 1.5f);
             isGameOver = true;
-            GameOver.Raise();
+            Timer.Register(3.0f, () =>
+            {
+                GameOver.Raise();
+            });
         }
     }
 
@@ -74,5 +93,11 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0f;
         });
+    }
+    
+    public void EndTutorial()
+    {
+        OnEndTutorial.Raise();
+        StartGame = true;
     }
 }

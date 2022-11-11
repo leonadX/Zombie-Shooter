@@ -40,18 +40,19 @@ public class Controls : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         if (!GameManager.instance.isGameOver)
         {
-            Vector2 a = eventData.delta - (Vector2)PlayerController.instance.player.transform.position;
+            Vector2 a = eventData.delta - (Vector2)MainPlayerController.instance.player.transform.position;
             a = new Vector2(a.x, 0);
             float angle = Mathf.Atan(a.x / a.y);
             Quaternion targetRotation = Quaternion.FromToRotation(Vector3.forward, a);
-            PlayerController.instance.player.transform.rotation = Quaternion.Slerp(PlayerController.instance.player.transform.rotation, targetRotation, Time.deltaTime * 1.5f);
+            //targetRotation = Quaternion.Euler(0, angle * 57.296f, 0);
+            MainPlayerController.instance.player.transform.rotation = Quaternion.Slerp(MainPlayerController.instance.player.transform.rotation, targetRotation, Time.deltaTime * 1.5f);
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         if (!GameManager.instance.isGameOver)
-            PlayerController.instance.SpawnArrow();
+            MainPlayerController.instance.SpawnArrow();
         //PlayerController.instance.player.transform.rotation = Quaternion.Euler(0, 0, 0);
         //handOnScreen = false;
     }

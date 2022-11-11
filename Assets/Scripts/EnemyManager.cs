@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
     GameObject player;
     bool collided = false;
     public float maxDistance;
+    public Animator zombie;
     public GameObject explosionEffect;
     public GameEvent explosionSoundEvent;
     public GameEvent PlayerexplosionSoundEvent;
@@ -23,7 +24,10 @@ public class EnemyManager : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, player.transform.position) > 0.75f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, maxDistance * Time.deltaTime);
+                Vector3 targetPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, maxDistance * Time.deltaTime);
+                /*Quaternion targetRotation = Quaternion.FromToRotation(Vector3.forward, targetPosition);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * .5f);*/
             }
             else
             {
@@ -39,17 +43,17 @@ public class EnemyManager : MonoBehaviour
                 }
             }
         }
-        if(GameManager.instance.scoreText.color == Color.red)
+        if(GameManager.instance.scoreText.color == Color.green)
         {
 
             
             Invoke("ChangeScoreColorWhite",0.5f);
         }
     }
-    void ChangeScoreColorRed()
+    void ChangeScoreColorGreen()
     {
         
-        GameManager.instance.scoreText.color= Color.red;
+        GameManager.instance.scoreText.color= Color.green;
     
         
     }
@@ -62,7 +66,7 @@ public class EnemyManager : MonoBehaviour
     public void UpdateScore()
     {
         GameManager.instance.score += 1;
-        Invoke("ChangeScoreColorRed",0f);
+        Invoke("ChangeScoreColorGreen",0f);
         
         
         

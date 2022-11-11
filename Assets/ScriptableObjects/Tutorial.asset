@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Tutorial
   m_EditorClassIdentifier: 
   tutorial_Instructions:
-  - Jump up
-  - Jump down
-  - Jump left
-  - Jump right
+  - Welcome to the zombie apocalypse, you're the only human left. Survive for as
+    long as your can.
+  - Tap the joystick and slide to control the character.

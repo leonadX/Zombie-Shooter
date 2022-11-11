@@ -7,11 +7,15 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public Transform highSpawnPoint;
     public Transform lowSpawnPoint;
+    private float spawnRate;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnEnemies());
+        spawnRate = 3.0f;
+        //increase spawn rate
+        if (GameManager.instance.StartGame)
+            StartEnemyRush();
     }
 
     // Update is called once per frame
@@ -20,14 +24,20 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
+    public void StartEnemyRush()
+    {
+        InvokeRepeating("IncreaseSpawnRate", 30, 30);
+        StartCoroutine(SpawnEnemies());
+    }
+
     IEnumerator SpawnEnemies()
     {
         while(!GameManager.instance.isGameOver)
         {
-            Vector3 spawnPos = new Vector3(-5, 0.15f, Random.Range(-2, 2));
+            Vector3 spawnPos = new Vector3(-5, -0.377f, Random.Range(-2, 2));
             spawnPos = GetSpawnPos();
-            yield return new WaitForSeconds(3.0f);
-            GameObject clone = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            yield return new WaitForSeconds(spawnRate);
+            GameObject clone = Instantiate(enemyPrefab, spawnPos, enemyPrefab.transform.rotation);
         }
        
     }
@@ -42,13 +52,19 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPos;
         if (Random.value > .5f)
         {
-            spawnPos = new Vector3(Random.Range(x2, x1), .15f, (Random.value > .5f) ? z1 : z2);
+            spawnPos = new Vector3(Random.Range(x2, x1), -.377f, (Random.value > .5f) ? z1 : z2);
         }
         else
         {
-            spawnPos = new Vector3(x2, 0.15f, Random.Range(z1,z2));
+            spawnPos = new Vector3(x2, -.377f, Random.Range(z1,z2));
         }
 
         return spawnPos;
+    }
+
+    public void IncreaseSpawnRate()
+    {
+        spawnRate /= 1.1f;
+        spawnRate = Mathf.Clamp(spawnRate, 1.5f, 3.0f);
     }
 }
