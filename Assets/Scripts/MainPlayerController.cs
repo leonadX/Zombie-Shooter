@@ -11,6 +11,7 @@ public class MainPlayerController : MonoBehaviour
     public Transform firePoint;
     public Slider InputSlider;
     public Animator animator;
+    //public Animation tikiAnimation;
 
     private void Awake()
     {
