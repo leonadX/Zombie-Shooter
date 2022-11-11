@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
     {
         Timer.Register(.33f, () =>
         {
-            SceneManager.LoadScene("GameScene");
+            SceneLoader.instance.OpenGameScene();
         });
     }
 
