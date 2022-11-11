@@ -8,6 +8,7 @@ public class TutorialManager : MonoBehaviour
 {
     public TutorialSO tutorials;
     public TextMeshProUGUI tutorialText;
+    public TextMeshProUGUI Text;
     public TextMeshProUGUI buttonText;
     public GameObject hand;
     public GameObject nextButton;
@@ -39,56 +40,38 @@ public class TutorialManager : MonoBehaviour
     }
     public void ChangeNext()
     {
-        //for(int i = 0; i<=tutorials.tutorial_Instructions.Length; i++)
-        //{
-
-        if (currentIndex + 1 != tutorials.tutorial_Instructions.Length)
-            tutorialText.GetComponent<RectTransform>().localScale = Vector3.zero;
-
-        currentIndex++;
-        if (currentIndex == tutorials.tutorial_Instructions.Length)
+        for(int i = 0; i<=tutorials.tutorial_Instructions.Length; i++)
         {
-            //currentIndex = 0;
-            
-<<<<<<< HEAD
-        
             currentIndex++;
-            if (currentIndex == tutorials.tutorial_Instructions.Length)
-                
-                currentIndex= 0;
-            if(currentIndex == 0)
-            {
-                nextButton.SetActive(false);
-            }
-            else
-            {
-                nextButton.SetActive(true);
-              }  
-            tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
+            if (currentIndex + 1 != tutorials.tutorial_Instructions.Length)
+                tutorialText.GetComponent<RectTransform>().localScale = Vector3.zero;
+
             
-=======
-            Timer.Register(.33f, () =>
-             {
-                 LeanTween.moveLocal(gameObject.transform.GetChild(1).gameObject, new Vector3(0, 2400, 0), 1.0f).setEase(LeanTweenType.easeInOutBack);
-             });
-            Timer.Register(1.35f, () => {
-                GameManager.instance.EndTutorial();
-                gameObject.SetActive(false); 
-            });
-            return;
->>>>>>> e7722cb686bc9da6224b2d93c5ba1673086f6dce
-        }
+            if (currentIndex == tutorials.tutorial_Instructions.Length)
+            {
+                //currentIndex = 0;
+                
+                Timer.Register(.33f, () =>
+                {
+                    LeanTween.moveLocal(gameObject.transform.GetChild(1).gameObject, new Vector3(0, 2400, 0), 1.0f).setEase(LeanTweenType.easeInOutBack);
+                });
+                Timer.Register(1.35f, () => {
+                    GameManager.instance.EndTutorial();
+                    gameObject.SetActive(false); 
+                });
+                return;
+            }
 
-        if (currentIndex == tutorials.tutorial_Instructions.Length - 1)
-        {
-            hand.SetActive(true);
-            buttonText.text = "Begin";
-            StartCoroutine(HandAnimation());
-        }
+            if (currentIndex == tutorials.tutorial_Instructions.Length - 1)
+            {
+                hand.SetActive(true);
+                buttonText.text = "Begin";
+                StartCoroutine(HandAnimation());
+            }
 
-        tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
-        LeanTween.scale(tutorialText.gameObject, Vector3.one, .3f).setEase(LeanTweenType.easeInOutBack);
-        //}
+            tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
+            LeanTween.scale(tutorialText.gameObject, Vector3.one, .3f).setEase(LeanTweenType.easeInOutBack);
+        }
     }
     public void ChangePrevious()
     {
@@ -100,14 +83,6 @@ public class TutorialManager : MonoBehaviour
             if (currentIndex == -1)
                 
                 currentIndex = tutorials.tutorial_Instructions.Length - 1;
-            if(currentIndex == 3)
-            {
-                prevButton.SetActive(false);
-            }
-            else
-            {
-                prevButton.SetActive(true);
-            }
 
             tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
 
