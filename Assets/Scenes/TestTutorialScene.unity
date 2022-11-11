@@ -773,6 +773,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorials: {fileID: 11400000, guid: 2510ddeba01359c418c794fd9dd2bf0c, type: 2}
   tutorialText: {fileID: 558276801}
+  nextButton: {fileID: 1928662310}
+  prevButton: {fileID: 935117137}
   currentIndex: 0
 --- !u!4 &742515981
 Transform:

@@ -8,6 +8,8 @@ public class TutorialManager : MonoBehaviour
 {
     public TutorialSO tutorials;
     public TextMeshProUGUI tutorialText;
+    public GameObject nextButton;
+    public GameObject prevButton;
     public int currentIndex;
     // Start is called before the first frame update
     void Start()
@@ -28,7 +30,9 @@ public class TutorialManager : MonoBehaviour
         
             currentIndex++;
             if (currentIndex == tutorials.tutorial_Instructions.Length)
+                
                 currentIndex= 0;
+                
             tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
         }
     }
@@ -40,7 +44,9 @@ public class TutorialManager : MonoBehaviour
         
             currentIndex--;
             if (currentIndex == -1)
+                
                 currentIndex = tutorials.tutorial_Instructions.Length - 1;
+
             tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
 
             
