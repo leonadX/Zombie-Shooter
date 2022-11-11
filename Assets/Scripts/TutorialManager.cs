@@ -29,7 +29,7 @@ public class TutorialManager : MonoBehaviour
             currentIndex++;
             if (currentIndex == tutorials.tutorial_Instructions.Length)
                 currentIndex= 0;
-            tutorialText.text = tutorials.tutorial_Instructions[i].ToString();
+            tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
         }
     }
     public void ChangePrevious()
@@ -41,7 +41,7 @@ public class TutorialManager : MonoBehaviour
             currentIndex--;
             if (currentIndex == -1)
                 currentIndex = tutorials.tutorial_Instructions.Length - 1;
-            tutorialText.text = tutorials.tutorial_Instructions[i].ToString();
+            tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
 
             
         }
