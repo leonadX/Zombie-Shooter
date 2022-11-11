@@ -46,15 +46,16 @@ public class Tutorial : MonoBehaviour
                 });
                 return;
             }
-            else if (currentIndex == tutorials.tutorial_Instructions.Length - 1)
+            if (currentIndex == tutorials.tutorial_Instructions.Length - 1)
             {
                 
                 buttonText.text = "Begin";
+                Debug.Log(tutorials.tutorial_Instructions.Length - 1);
+
             }
-            else if (currentIndex == 0)
+            if(currentIndex == 0)
             {
-                
-                buttonText.text = "Next";
+                buttonText.text = "MEMEAEW";
             }
             tutorialText.text = tutorials.tutorial_Instructions[currentIndex].ToString();
         }
