@@ -23,7 +23,7 @@ public class TutorialManager : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-        PlayerPrefs.DeleteAll();
+        
     }
 
     void Start()
@@ -32,6 +32,7 @@ public class TutorialManager : MonoBehaviour
         currentIndex = -1;
         tutorialText.GetComponent<RectTransform>().localScale = Vector3.zero;
         Invoke("ChangeNext", 1.6f);
+        
     }
 
     // Update is called once per frame
